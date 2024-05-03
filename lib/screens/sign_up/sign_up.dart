@@ -1,9 +1,11 @@
 import 'package:e_com2/constants/routes.dart';
-import 'package:e_com2/screens/home/home.dart';
-import 'package:e_com2/widgets/primary_button/primary_button.dart';
+import 'package:e_com2/firebase_helper/firebase_helper_auth.dart';
+import 'package:e_com2/screens/auth_ui/login/login.dart';
 import 'package:e_com2/widgets/top_titles/top_titles.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -13,6 +15,22 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final FirebaseAuthService _auth = FirebaseAuthService();
+
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  bool isSigningUp = false;
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   bool isShowPassword = true;
   @override
   Widget build(BuildContext context) {
@@ -28,7 +46,8 @@ class _SignUpState extends State<SignUp> {
               const SizedBox(
                 height: 24,
               ),
-               TextFormField(
+              TextFormField(
+                controller: _usernameController,
                 decoration: const InputDecoration(
                   hintText: "Name",
                   prefixIcon: Icon(
@@ -39,7 +58,8 @@ class _SignUpState extends State<SignUp> {
               const SizedBox(
                 height: 12,
               ),
-               TextFormField(
+              TextFormField(
+                controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   hintText: "E-mail",
@@ -52,18 +72,7 @@ class _SignUpState extends State<SignUp> {
                 height: 12,
               ),
               TextFormField(
-                keyboardType: TextInputType.phone,
-                decoration: const InputDecoration(
-                  hintText: "Phone",
-                  prefixIcon: Icon(
-                    Icons.phone_outlined,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              TextFormField(
+                controller: _passwordController,
                 obscureText: isShowPassword, //for hiddern a pssword
                 decoration: InputDecoration(
                   hintText: "Password",
@@ -86,34 +95,78 @@ class _SignUpState extends State<SignUp> {
               const SizedBox(
                 height: 40,
               ),
-              PrimaryButton(
-                title: "Create an aacount",
-                onPressed: () {
-                  Routes.instance.pushAndRemoveUntil(widget: const Home(), context: context);
+              InkWell(
+                onTap: () {
+                  _signUp();
                 },
-              ),
-              const SizedBox(
-                height: 26,
-              ),
-              const Center(child: Text("I have already an account?")),
-              const SizedBox(
-                height: 8,
+                child: Container(
+                  width: double.infinity,
+                  height: 45,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                      child: isSigningUp
+                          ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : const Text(
+                              "Create account",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                ),
               ),
               Center(
-                  child: CupertinoButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text(
-                        "Login",
-                        style: TextStyle(color: Theme.of(context).primaryColor),
-                      ),
-                      ),
-                      ),
+                child: CupertinoButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(
+                    "Login",
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void _signUp() async {
+    setState(() {
+      isSigningUp = true;
+    });
+
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    User? user = await _auth.signUpWithEmailAndPassword(email, password);
+
+    setState(() {
+      isSigningUp = false;
+    });
+    if (user != null) {
+      showToast(message: "User is successfully created . Please login");
+      Routes.instance
+          .pushAndRemoveUntil(widget: const Login(), context: context);
+    } else {
+      showToast(message: "Some error ");
+    }
+  }
+
+  void showToast({required String message}) {
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.yellow,
+        textColor: Colors.black,
+        fontSize: 16.0);
   }
 }

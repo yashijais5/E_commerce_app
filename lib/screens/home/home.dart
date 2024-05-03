@@ -154,7 +154,7 @@ List<ProductModel> bestProducts = [
   ProductModel(
     id: "1",
     image:
-        "https://images.everydayhealth.com/images/diet-nutrition/ordinary-fruits-with-amazing-health-benefits-05-1440x810.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-iBBPTZQIqM35k_p2tmoO2WHLUpAn8_zvnw&usqp=CAU",
     name: "Strawberry",
     description: "this is good ",
     price: "15",
@@ -164,7 +164,7 @@ List<ProductModel> bestProducts = [
   ProductModel(
     id: "4",
     image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjZqDHnjqp1Vb8UILHBn0im7N2xlHQjT4f0Q&usqp=CAU",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFMRhfE1LD0E7wecTjAeVbJBo6FRe01jImOw&usqp=CAU",
     name: "Apple",
     description: "Eat aaple when its morning ",
     price: "10",
@@ -176,7 +176,7 @@ List<ProductModel> bestProducts = [
     image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjZqDHnjqp1Vb8UILHBn0im7N2xlHQjT4f0Q&usqp=CAU",
     name: "Apple",
-    description: "Eat aaple when its morning ",
+    description: "Eat Aaple when its morning ",
     price: "10",
     status: "pending",
     isfavourite: false,
@@ -184,8 +184,8 @@ List<ProductModel> bestProducts = [
   ProductModel(
     id: "2",
     image:
-        "https://images.news18.com/ibnlive/uploads/2022/03/watermelon-164700207416x9.jpg?impolicy=website&width=1200&height=675",
-    name: "Watermellon",
+        "https://toronto.esdemo.in/static/2023/11/banana.png",
+    name: "Banana",
     description: "nice fruit for eating ",
     price: "25",
     status: "pending",
@@ -194,8 +194,8 @@ List<ProductModel> bestProducts = [
   ProductModel(
     id: "3",
     image:
-        "https://images.everydayhealth.com/images/diet-nutrition/ordinary-fruits-with-amazing-health-benefits-05-1440x810.jpg",
-    name: "Banana ",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMhTpQ9HcrGqfke2lGzVjso5_AUHKVIXVngUbhHmUt9w&s",
+    name: "Orange ",
     description: "this is good for health ",
     price: "30",
     status: "pending",
@@ -204,8 +204,8 @@ List<ProductModel> bestProducts = [
   ProductModel(
     id: "4",
     image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjZqDHnjqp1Vb8UILHBn0im7N2xlHQjT4f0Q&usqp=CAU",
-    name: "Apple",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrnRGRJWbsll2yFFnD_sv9Oq57HgUQZmLSPg&usqp=CAUhttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrnRGRJWbsll2yFFnD_sv9Oq57HgUQZmLSPg&usqp=CAU",
+    name: "Mango",
     description: "Eat aaple when its morning ",
     price: "10",
     status: "pending",
